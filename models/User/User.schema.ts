@@ -13,6 +13,7 @@ export interface IUser {
   login: string
   loginType: LoginType
   password: string
+  source: string
 }
 
 const UserSchema = new Schema({

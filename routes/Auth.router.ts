@@ -1,7 +1,7 @@
 
 // @deno-types='npm:@types/express'
 import { Router, Request, Response } from 'npm:express'
-import UserController from "../features/Users/User.controller.ts";
+import UserController from "../features/controllers/User.controller.ts";
 
 const AuthRouter = Router()
 
@@ -20,7 +20,11 @@ AuthRouter.get('/ok', (_req: Request, res: Response) => {
 })
 
 
-
+// User routes
+AuthRouter.post('/users', UserController.create)
 AuthRouter.get('/users', UserController.findAll)
+AuthRouter.get('/users/:id', UserController.findOne)
+AuthRouter.patch('/users/:id', UserController.update)
+AuthRouter.delete('/users/:id', UserController.delete)
 
 export default AuthRouter

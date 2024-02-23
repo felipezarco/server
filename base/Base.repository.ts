@@ -9,10 +9,16 @@ export default class BaseRepository<T> {
   }
 
   async create(data: T) {
+    new this.model(data);
     return await this.model.create(data);
   }
 
+  async findById(id: string) {
+    return await this.model.findById(id);
+  }
+
   async findOne(query: FilterQuery<T>) {
+    if (query.id) return await this.model.findById(query.id);
     return await this.model.findOne(query);
   }
 
@@ -23,6 +29,10 @@ export default class BaseRepository<T> {
   async update(id: string, update: UpdateQuery<T>) {
     return await this.model.findByIdAndUpdate(id, update, {
       new: true,
-    });
+    })
+  }
+
+  async delete(id: string) {
+    return await this.model.findByIdAndDelete(id);
   }
 }
