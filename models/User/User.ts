@@ -1,9 +1,8 @@
 import { model, Model } from "npm:mongoose";
 import UserSchema, { IUser } from "./User.schema.ts";
 import BaseRepository from "../../base/Base.repository.ts";
-import User from "./User.model.ts";
 
-class UserRepository extends BaseRepository<IUser> {
+class User extends BaseRepository<IUser> {
   constructor(model: Model<IUser>) {
     super(model)
   }
@@ -13,6 +12,6 @@ class UserRepository extends BaseRepository<IUser> {
   }
 }
 
-export default new UserRepository(
-  model<IUser>('User', UserSchema.loadClass(User))
+export default new User(
+  model<IUser>('User', UserSchema)
 )

@@ -1,5 +1,6 @@
 import { Schema } from "npm:mongoose"
 import { hash } from "https://deno.land/x/bcrypt@v0.4.1/mod.ts"
+import UserClass from "./User.class.ts";
 
 export enum LoginType {
   email = 'email',
@@ -8,12 +9,15 @@ export enum LoginType {
 
 export const LoginTypeValues = Object.values(LoginType)
 
-export interface IUser {
+export interface IUser extends IUserVirtuals  {
   name: string
   login: string
   loginType: LoginType
   password: string
-  source: string
+}
+
+interface IUserVirtuals {
+  firstTwoNameLetters?: string
 }
 
 const UserSchema = new Schema({
@@ -53,5 +57,7 @@ UserSchema.pre('save', async function(next) {
   }                                                                                                                                                      
   next()                                                                                                                                                                     
 }) 
+
+UserSchema.loadClass(UserClass)
 
 export default UserSchema

@@ -1,19 +1,16 @@
 import { IUser } from "./User.schema.ts"
 
-class User implements IUser {
+class UserClass implements IUser {
   name: IUser['name']
   login: IUser['login']
   loginType: IUser['loginType']
   password: IUser['password']
-  source: string
 
   constructor(user: IUser) {
     this.name = user.name
     this.login = user.login
     this.loginType = user.loginType
     this.password = user.password
-    this.source = 'wow'
-    console.log(user)
   }
 
   get firstTwoNameLetters () {
@@ -21,6 +18,6 @@ class User implements IUser {
   }
 }
 
-export default User
+export default UserClass
 
 

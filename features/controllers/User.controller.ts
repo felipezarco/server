@@ -1,13 +1,19 @@
-import User from "../../models/User/User.model.ts";
-import UserRepository from "../../models/User/User.repository.ts";
+import UserRepository from "../../models/User/User.ts";
 import { Request, Response } from "npm:express";
 
 export default class UserController {
   static async create(req: Request, res: Response): Promise<Response>{
     const { name, login, loginType, password } = req.body;
-    const user = new User({ 
-      name, login, loginType, password, source: 'ok'});
-    await UserRepository.create(user);
+
+    
+    const user = await UserRepository.create({
+      name,
+      login,
+      loginType,
+      password,
+    });
+
+
     return res.send_ok("Bem-vindo(a), " + user.firstTwoNameLetters, user);
   }
 
