@@ -19,7 +19,7 @@ server
 └───.env.example
 └───.env.development
 └───.gitignore
-└───app.ts
+└───server.ts
 └───deno.jsonc
 └───Dockerfile
 
@@ -34,7 +34,7 @@ docs: automatically generated Swagger documentation
 
 # How to run
 ```
-deno run --allow-net --allow-read --allow-write app.ts [env]
+deno run --allow-net --allow-read --allow-write server.ts [env]
 ```
 Where env is the environment to run the server, it can be: 
 local, development, staging, production

@@ -1,48 +1,35 @@
 import { load } from 'https://deno.land/std@0.201.0/dotenv/mod.ts'
-
 type ConstEnum<T, V = string> = Extract<T[keyof T], V>
 type EnvironmentName = ConstEnum<typeof EnvironmentName>
-
-const environmentName = Deno.args[0] as EnvironmentName
-
-const EnvironmentName = { development: 'development', production: 'production' } as const
+const name = Deno.args[0] as EnvironmentName
+const EnvironmentName = { dev: 'dev', production: 'production' } as const
 
 await load({
-  envPath: `.env.${environmentName}`,
+  envPath: `.env.${name}`,
   examplePath: '.env.example',
   defaultsPath: '.env.defaults',
   allowEmptyValues: false,
   export: true
 })
 
-// const EnvSchema = Schema({
-//   APP: string,
-//   PORT: number.optional(),
-//   IP: string.optional(),
-// })
+// TODO: Validate 
 
-// const envObject = Deno.env.toObject()
-
-// const [err] = EnvSchema.destruct().validator()
-
-// if (err) throw new Error(err)
-
-if (Object.values(EnvironmentName).includes(environmentName) === false) {
-  throw new Error(`Invalid EnvironmentName: ${environmentName}`)
+if (Object.values(EnvironmentName).includes(name) === false) {
+  throw new Error(`Invalid EnvironmentName: ${name}`)
 }
 
 export default class Env {
   
-  static get environmentName() {
-    return environmentName
+  static get name() {
+    return name
   }
 
-  static get isDevelopment() {
-    return environmentName === EnvironmentName.development
+  static get dev() {
+    return name === EnvironmentName.dev
   }
 
-  static get isProduction() {
-    return environmentName === EnvironmentName.production
+  static get production() {
+    return name === EnvironmentName.production
   }
 
   static get object() {
@@ -54,12 +41,21 @@ export default class Env {
   }
 
   static get port() {
-    return Number(Deno.env.get('PORT')) || 3000
+    return Number(Deno.env.get('PORT'))
+  }
+
+  static get serverPort() {
+    return Number(Deno.env.get('SERVER_PORT'))
   }
 
   static get ip() {
-    return Deno.env.get('IP')
+    return Deno.env.get('IP') ?? 'localhost'
   }
 
-
+  static getDatabasePasswordByUsername(databaseUsername: string): string {
+    if (!databaseUsername) throw Error('Please provide a database username!')
+    const password =  Deno.env.get(`DATABASE_PASSWORD_FOR_${databaseUsername}`)
+    if (!password) throw Error(`No password found for ${databaseUsername}`)
+    return password
+  }
 }
