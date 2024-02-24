@@ -1,9 +1,9 @@
-import { model, Model } from "npm:mongoose";
+import mongoose from "npm:mongoose";
 import UserSchema, { IUser } from "./User.schema.ts";
 import BaseRepository from "../../base/Base.repository.ts";
 
 class User extends BaseRepository<IUser> {
-  constructor(model: Model<IUser>) {
+  constructor(model: mongoose.Model<IUser>) {
     super(model)
   }
 
@@ -13,5 +13,5 @@ class User extends BaseRepository<IUser> {
 }
 
 export default new User(
-  model<IUser>('User', UserSchema)
+  mongoose.model<IUser>('User', UserSchema)
 )

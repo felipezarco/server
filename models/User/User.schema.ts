@@ -1,6 +1,7 @@
-import { Schema } from "npm:mongoose"
+import mongoose from "npm:mongoose"
 import { hash } from "https://deno.land/x/bcrypt@v0.4.1/mod.ts"
-import UserClass from "./User.class.ts";
+import UserClass from "./User.class.ts"
+import BaseSchema, { required }  from "./../../base/Base.schema.ts"
 
 export enum LoginType {
   email = 'email',
@@ -16,42 +17,42 @@ export interface IUser extends IUserVirtuals  {
   password: string
 }
 
-interface IUserVirtuals {
+interface IUserVirtuals extends mongoose.Document {
   firstTwoNameLetters?: string
 }
 
-const UserSchema = new Schema({
-  name: {
-    type: String,
-    required: [true, 'O usuário deve ter um nome!'],
-  },
-  login: {
-    type: String,
-    required: [true, 'O usuário deve ter login!'],
-  },
-  loginType: {
-    type: String,
-    enum: LoginTypeValues,
-    required: [true, 'O usuário deve escolher um tipo de login!'],
-    message: `Tipo de login inválido: {VALUE}! Disponíveis: ${LoginTypeValues.join(", ")}`,
-  },
-  password: {
-    type: String,
-    required: [true, 'O usuário deve ter uma senha!'],
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now,
+class UserSchemaClass extends BaseSchema {
+  constructor() {
+    super({
+      name: {
+        type: String,
+        required: required('O usuário deve ter um nome!'),
+      },
+      login: {
+        type: String,
+        required: required('O usuário deve ter login!'),
+      },
+      loginType: {
+        type: String,
+        enum: LoginTypeValues,
+        required: required('O usuário deve escolher um tipo de login!'),
+        message: `Tipo de login inválido: {VALUE}! Disponíveis: ${LoginTypeValues.join(", ")}`,
+      },
+      password: {
+        type: String,
+        required: required('O usuário deve ter uma senha!'),
+      },
+      
+
+    }, {})
   }
-})
+}
+
+const UserSchema = new UserSchemaClass().schema
 
 UserSchema.index({ login: 1 }, { unique: true })
 
-UserSchema.pre('save', async function(next) {                                                                                                                                        
+UserSchema.pre('save', async function(this: IUser, next) {     
   if(this.isModified('password')) {
     this.password = await hash(this.password, Deno.env.get('BCRYPT_SALT'))
   }                                                                                                                                                      
