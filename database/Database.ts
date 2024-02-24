@@ -36,7 +36,6 @@ export class Database {
   
   public connect = async (): Promise<typeof mongoose | void> => {
     try {
-      console.log(this.connectionString)
       const connection = await mongoose.connect(this.connectionString)
       if (connection) Print.success(`Successfully connected to ${this.database} at ${this.hostname}`)
       return connection

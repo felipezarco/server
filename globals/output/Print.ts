@@ -9,4 +9,8 @@ export default class Print {
     return console.info(`%c${message}`, "background-color: red");
   }
 
+  public static info(message: string) {
+    return console.info(`%c${message}`, "background-color: blue");
+  }
+
 }
