@@ -1,18 +1,16 @@
-import RedisConfiguration from "../../config/RedisConfiguration.ts";
-import QueueClass from "../QueueClass.ts"
-import Queues from "../Queues.ts";
+import log from "../../globals/output/log.ts";
+import QueueClass from "../Queue.ts"
+import { Queues } from "../Queue.ts"
 import bullMQ from 'npm:bullmq'
-export const PrintTimeQueue = new QueueClass({}).create(Queues.PrintTimeQueue)
 
-const worker = new bullMQ.Worker(Queues.PrintTimeQueue, (job: bullMQ.Job) => {
-  console.log(job.name, job.data)
-}, { connection: RedisConfiguration.connection
-})
+const queueInstance = new QueueClass(Queues.PrintTimeQueue, {})
+const PrintTimeQueue = queueInstance.create()
 
-// if (this.options.terminalLogs) {  
-//   worker.on('completed', (job) => {
-//     console.log(`Job completed with result ${job.returnvalue}`)
-//   })
-// }
+queueInstance.func(
+  (_job: bullMQ.Job) => {
+    log(_job)
+    log('Time now is ' + new Date())
+  }
+)
 
 export default PrintTimeQueue

@@ -1,3 +1,6 @@
+# Jobs
+jobs/output
+
 # Doc
 todo.md
 *.swagger.json
@@ -129,3 +132,5 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+

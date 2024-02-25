@@ -1,5 +1,3 @@
-import Jobs from './jobs/Jobs.ts'
-
 // @deno-types='npm:@types/express' 
 import express from 'npm:express'
 import responser from 'npm:responser'
@@ -15,7 +13,8 @@ import unauthRouter from './routes/Unauth.router.ts'
 import authRouter from './routes/Auth.router.ts'
 import Env from './config/Env.ts'
 import { Database } from "./database/Database.ts"
-import Print from "./globals/output/Print.ts"
+import log from "./globals/output/log.ts"
+import BackgroundJobs from './jobs/BackgroundJobs.ts'
 
 const app = express()
 
@@ -44,11 +43,11 @@ await db.connect()
 
 if (app) {
   app.listen(Env.serverPort, () => {
-    Print.info(`
+    log(`
       Back-end is running on port ${Env.ip}:${Env.serverPort} (${Env.name})
     `)
   })
 }
 
-const jobs = new Jobs()
-jobs.run()
+BackgroundJobs.enqueueBackgroundJobQueues()
+

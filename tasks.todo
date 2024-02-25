@@ -1,0 +1,10 @@
+
+- [] Send emails with nodemailer or similar
+- [] Authentication with passport
+- [] Authorization with jwt
+- [] Auth API and API versioning
+- [] Add http security with helmet
+- [] Add logging mechanism
+- [] Add file upload middleware for 1 or multiple files
+- [] Replace express with hono
+- [] Better request logging with morgan-like cli 
