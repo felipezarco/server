@@ -5,7 +5,7 @@ const UnauthRouter = Router()
 /**
  * @openapi
  * /unauth/status:
- *   get:
+ *   get: 
  *     description: Check Server Status
  *     responses:
  *       200:

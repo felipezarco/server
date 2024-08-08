@@ -10,6 +10,7 @@ export const QueuesValues = Object.values(Queues)
 
 export default class Queue {
   
+  // TODO: make this not bull specifc
   private connection = JobsConfiguration.connection
   private queueName: Queues | null = null
   private queueOptions: bullMQ.QueueOptions = { connection: this.connection }

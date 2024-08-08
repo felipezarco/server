@@ -28,15 +28,19 @@ app.use(express.urlencoded({ extended: true }))
 app.use(morgan('dev'))
 app.use(express.static('public'))
 
-app.use('/docs', docsRouter)
-app.use('/unauth', unauthRouter)
-app.use('/auth', authRouter)
+/***************************************************************** 
+  Zarco says: Never split route path into multiple files
+  It's good to be able to search "/my/awesome/route/complete/path"
+******************************************************************/
 
+app.use(docsRouter)
+app.use(unauthRouter)
+app.use(authRouter)
 
 const db = new Database({
-  hostname: 'universitycluster.huzifrk.mongodb.net',
-  database: 'MAIN_PRD_DB',
-  username: 'university_db_admin',
+  hostname: 'mongodbcluster.8twlhdy.mongodb.net',
+  database: 'MAIN_DATABASE',
+  username: 'mongoclusteradmin2845',
 })
 
 await db.connect()

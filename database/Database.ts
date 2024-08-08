@@ -15,6 +15,8 @@ export class Database {
   private hostname: string
   private database: string
 
+  private printConnectionStringOnConnect = false
+
   constructor(databaseConnection: IDatabaseConnection) {
     this.hostname = databaseConnection.hostname
     this.database = databaseConnection.database
@@ -36,6 +38,7 @@ export class Database {
   
   public connect = async (): Promise<typeof mongoose | void> => {
     try {
+      if (this.printConnectionStringOnConnect) Print.info(this.connectionString)
       const connection = await mongoose.connect(this.connectionString)
       if (connection) Print.success(`Successfully connected to ${this.database} at ${this.hostname}`)
       return connection
