@@ -5,6 +5,8 @@ import swaggerUi from 'npm:swagger-ui-express'
 // @deno-types='npm:@types/express'
 import { Router } from 'npm:express'
 
+import path from 'node:path'
+
 export type ISwagger = {
   title?: string
   version?: string
@@ -21,8 +23,8 @@ export default class Swagger {
   private title = 'API Documentation'
   private version = '1.0.0'
   private apis: Array<string> = []
-  private customCssPath = '/swagger.css'
-  private customJsPath = '/swagger.js'
+  private customCssPath = path.resolve('./custom/swagger.css')
+  private customJsPath = path.resolve('./custom/swagger.js')
   private swaggerDocument: object = {}
   private generateJsonFile = true
   private swaggerOptions: swaggerUi.SwaggerOptions = {}
