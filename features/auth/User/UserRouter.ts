@@ -6,6 +6,12 @@ const UserRouter = Router()
 
 const userController = new UserController()
 
+/***************************************************************** 
+  Zarco says: This follows official Swagger specifications
+  https://swagger.io/docs/specification/describing-responses
+  https://github.com/Surnet/swagger-jsdoc
+******************************************************************/
+
 /**
  * @openapi
  * /auth/users:
