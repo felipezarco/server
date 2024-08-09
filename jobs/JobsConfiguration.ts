@@ -8,8 +8,11 @@ export default class JobsConfiguration {
     
     terminalLogs: false,
 
-    /* Zarco says: outputs to path: jobs/output/ (this folder is in .gitignore) */
-    /* Zarco warns: this will potentially create a lot of files! Beware setting to true. */ 
+
+    /***************************************************************** 
+      Zarco says: outputs to jobs/output/ (this folder is in .gitignore)
+      Beware setting to true: this will potentially create a lot of files! 
+    ******************************************************************/
     outputToJsonFile: false, 
   }
 }

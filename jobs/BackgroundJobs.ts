@@ -4,7 +4,9 @@ export default class BackgroundJobs {
 
   static enqueueBackgroundJobQueues() {
 
-    // Zarco says: Add new background routine jobs (schedule queue addition) here
+    /***************************************************************** 
+      Zarco says: You may add new background routine jobs here
+    ******************************************************************/
 
     // PrintTimeQueue.add('random', { randomStuff: new Date() }, {
     //   repeat: {
