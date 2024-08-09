@@ -4,6 +4,10 @@ import UserController from "./UserController.ts"
 import { Request } from "npm:express"
 import UserRepository from "../../../models/User/UserRepository.ts"
 
+/***************************************************************** 
+  Zarco says: Note that you can mock whatever methods you need 
+******************************************************************/
+
 class MockUserRepository {
   findMany() {
     return Promise.resolve([
