@@ -8,9 +8,9 @@ import morgan from 'npm:morgan'
 // @deno-types='npm:@types/helmet'
 import helmet from 'npm:helmet'
 
-import docsRouter from './routes/Docs.router.ts'
-import unauthRouter from './routes/Unauth.router.ts'
-import authRouter from './routes/Auth.router.ts'
+import docsRouter from './routes/DocsRouter.ts'
+import unauthRouter from './routes/UnauthRouter.ts'
+import authRouter from './routes/AuthRouter.ts'
 import Env from './config/Env.ts'
 import { Database } from "./database/Database.ts"
 import log from "./globals/output/log.ts"

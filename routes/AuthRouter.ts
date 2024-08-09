@@ -1,7 +1,7 @@
 
 // @deno-types='npm:@types/express'
 import { Router, Request, Response } from 'npm:express'
-import UserRouter from "../features/auth/User/User.router.ts";
+import UserRouter from "../features/auth/User/UserRouter.ts";
 
 const AuthRouter = Router()
 

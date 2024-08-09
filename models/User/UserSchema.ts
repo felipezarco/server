@@ -1,15 +1,14 @@
 import mongoose from "npm:mongoose"
 import { hash } from "https://deno.land/x/bcrypt@v0.4.1/mod.ts"
-import UserClass from "./User.class.ts"
-import BaseSchema, { required }  from "./../../base/Base.schema.ts"
-
+import UserClass from "./UserClass.ts"
+import BaseSchema, { required } from '../../base/BaseSchema.ts'
 export enum LoginType {
   email = 'email',
   phone = 'phone',
 }
 
 export const LoginTypeValues = Object.values(LoginType)
-
+export type IUserDocument = IUser & mongoose.Document
 export interface IUser extends IUserVirtuals  {
   name: string
   login: string
@@ -17,7 +16,7 @@ export interface IUser extends IUserVirtuals  {
   password: string
 }
 
-interface IUserVirtuals extends mongoose.Document {
+interface IUserVirtuals {
   firstTwoNameLetters?: string
 }
 
@@ -52,7 +51,7 @@ const UserSchema = new UserSchemaClass().schema
 
 UserSchema.index({ login: 1 }, { unique: true })
 
-UserSchema.pre('save', async function(this: IUser, next) {     
+UserSchema.pre('save', async function(this: IUserDocument, next) {     
   if(this.isModified('password')) {
     this.password = await hash(this.password, Deno.env.get('BCRYPT_SALT'))
   }                                                                                                                                                      

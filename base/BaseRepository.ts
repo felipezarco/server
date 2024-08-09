@@ -2,7 +2,7 @@ import { Model, FilterQuery, UpdateQuery } from 'npm:mongoose'
 
 export default class BaseRepository<T> {
 
-  model: Model<T>
+  model: Model<T> 
 
   constructor(model: Model<T>) {
     this.model = model;
@@ -36,3 +36,4 @@ export default class BaseRepository<T> {
     return await this.model.findByIdAndDelete(id);
   }
 }
+

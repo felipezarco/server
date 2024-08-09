@@ -1,4 +1,4 @@
-import { IUser } from "./User.schema.ts"
+import { IUser } from "./UserSchema.ts"
 
 class UserClass implements IUser {
   name: IUser['name']

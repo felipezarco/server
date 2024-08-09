@@ -4,8 +4,9 @@ import { Router } from 'npm:express'
 import Swagger from '../docs/Swagger.ts'
 
 /***************************************************************** 
-  Zarco says: This will be generated based on @openai comments
+  Zarco says: Docs will be generated based on @openai comments
   Swagger json files will be generated in ./docs/jsons
+  New Swagger should only be instantiated in case of new independent api
 ******************************************************************/
 
 const DocsRouter = Router()
@@ -14,7 +15,8 @@ const authSwagger = new Swagger({
   title: 'Auth API Documentation',
   version: '1.0.0',
   routerPaths: [
-    './routes/Auth.router.ts'
+    './routes/AuthRouter.ts',
+    './features/auth/User/UserRouter.ts'
   ]
 })
 
@@ -24,7 +26,7 @@ const unauthSwagger = new Swagger({
   title: 'Unauth API Documentation',
   version: '1.0.0',
   routerPaths: [
-    './routes/Unauth.router.ts'
+    './routes/UnauthRouter.ts'
   ]
 })
 
