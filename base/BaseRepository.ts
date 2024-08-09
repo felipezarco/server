@@ -9,8 +9,11 @@ export default class BaseRepository<T> {
   }
 
   async create(data: T) {
-    new this.model(data);
     return await this.model.create(data);
+  }
+
+  async findMany(query: FilterQuery<T>) {
+    return await this.model.find(query);
   }
 
   async findById(id: string) {
@@ -18,12 +21,8 @@ export default class BaseRepository<T> {
   }
 
   async findOne(query: FilterQuery<T>) {
-    if (query.id) return await this.model.findById(query.id);
+    if (query.id) { Object.assign(query, { _id: query.id }); delete query.id }
     return await this.model.findOne(query);
-  }
-
-  async findMany(query: FilterQuery<T>) {
-    return await this.model.find(query);
   }
 
   async update(id: string, update: UpdateQuery<T>) {

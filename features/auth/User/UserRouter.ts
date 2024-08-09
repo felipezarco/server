@@ -3,6 +3,7 @@ import { Router } from 'npm:express'
 import UserController from "./UserController.ts";
 
 const UserRouter = Router()
+
 const userController = new UserController()
 
 /**
@@ -31,7 +32,7 @@ UserRouter.post('/auth/users', userController.create)
  *         description: No users found
  */
 
-UserRouter.get('/auth/users', userController.findAll)
+UserRouter.get('/auth/users', userController.findMany)
 
 /**
  * @openapi

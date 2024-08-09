@@ -3,7 +3,7 @@ import UserSchema, { IUser } from "./UserSchema.ts";
 import BaseRepository from "../../base/BaseRepository.ts";
 
 class UserRepository extends BaseRepository<IUser> {
-  constructor(model: mongoose.Model<IUser>) {
+  constructor(model: mongoose.Model<IUser> = mongoose.model<IUser>('User', UserSchema)) {
     super(model)
   }
 
@@ -11,6 +11,5 @@ class UserRepository extends BaseRepository<IUser> {
     return this.model.findOne({ login })
   }
 }
-export default new UserRepository(
-  mongoose.model<IUser>('User', UserSchema)
-) 
+
+export default UserRepository
