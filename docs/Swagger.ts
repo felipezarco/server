@@ -18,6 +18,12 @@ export type ISwagger = {
   swaggerOptions?: swaggerUi.SwaggerOptions
 }
 
+/***************************************************************** 
+  Zarco says: This is file should not be modified !
+  (unless you need to update configurations to all swaggers)
+  If you need a new swagger page checkout DocsRouter instead.
+******************************************************************/
+
 export default class Swagger {
   private openApiVersion = '3.0.0'
   private title = 'API Documentation'

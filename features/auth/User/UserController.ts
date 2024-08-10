@@ -1,4 +1,4 @@
-import UserRepository from "../../../models/User/UserRepository.ts";
+import UserRepository from "../../../models/MainDatabase/User/UserRepository.ts";
 import { Request, Response } from "npm:express";
 
 export default class UserController {

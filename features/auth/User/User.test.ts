@@ -2,7 +2,7 @@ import { MockResponser } from "../../../globals/Stubs.ts";
 import { assertEquals } from 'https://deno.land/std@0.201.0/assert/mod.ts'
 import UserController from "./UserController.ts"
 import { Request } from "npm:express"
-import UserRepository from "../../../models/User/UserRepository.ts"
+import UserRepository from "../../../models/MainDatabase/User/UserRepository.ts"
 
 /***************************************************************** 
   Zarco says: Note that you can mock whatever methods you need 

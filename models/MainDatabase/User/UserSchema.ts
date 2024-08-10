@@ -1,7 +1,7 @@
 import mongoose from "npm:mongoose"
 import { hash } from "https://deno.land/x/bcrypt@v0.4.1/mod.ts"
 import UserClass from "./UserClass.ts"
-import BaseSchema, { required } from '../../base/BaseSchema.ts'
+import BaseSchema, { required } from '../../../base/BaseSchema.ts'
 export enum LoginType {
   email = 'email',
   phone = 'phone',
