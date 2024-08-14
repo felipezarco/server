@@ -1,0 +1,29 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Deno (Launch)",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "deno",
+      "console": "integratedTerminal",
+      "runtimeArgs": [
+        "run",
+        "--inspect-brk",
+        "-A",
+        // "-c",
+        // "tsconfig.json",
+        "server.ts",
+        "dev"
+      ]
+    },
+    {
+      "name": "Deno (Attach)",
+      "type": "node",
+      "request": "attach",
+      "port": 9229,
+      "cwd": "${workspaceFolder}",
+    }
+  ]
+}
