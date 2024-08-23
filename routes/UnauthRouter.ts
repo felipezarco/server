@@ -1,19 +1,19 @@
-import { Router, Request, Response } from 'npm:express'
+import { Request, Response, Router } from "npm:express";
 
-const UnauthRouter = Router()
+const UnauthRouter = Router();
 
 /**
  * @openapi
  * /unauth/status:
- *   get: 
+ *   get:
  *     description: Check Server Status
  *     responses:
  *       200:
  *         description: Returns OK.
  */
 
-UnauthRouter.get('/unauth/status', (_req: Request, res: Response) => {
-  return res.send_ok('Server is Available')
-})
+UnauthRouter.get("/unauth/status", (_req: Request, res: Response) => {
+  return res.send_ok("Server is Available");
+});
 
-export default UnauthRouter
+export default UnauthRouter;

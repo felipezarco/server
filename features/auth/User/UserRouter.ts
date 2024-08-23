@@ -1,12 +1,12 @@
 // @deno-types='npm:@types/express'
-import { Router } from 'npm:express'
+import { Router } from "npm:express";
 import UserController from "./UserController.ts";
 
-const UserRouter = Router()
+const UserRouter = Router();
 
-const userController = new UserController()
+const userController = new UserController();
 
-/***************************************************************** 
+/*****************************************************************
   Zarco says: This follows official Swagger specifications
   https://swagger.io/docs/specification/describing-responses
   https://github.com/Surnet/swagger-jsdoc
@@ -24,7 +24,7 @@ const userController = new UserController()
  *         description: Bad request
  */
 
-UserRouter.post('/auth/users', userController.create)
+UserRouter.post("/auth/users", userController.create);
 
 /**
  * @openapi
@@ -34,11 +34,11 @@ UserRouter.post('/auth/users', userController.create)
  *     responses:
  *       200:
  *         description: Returns all users
- *       404:  
+ *       404:
  *         description: No users found
  */
 
-UserRouter.get('/auth/users', userController.findMany)
+UserRouter.get("/auth/users", userController.findMany);
 
 /**
  * @openapi
@@ -52,7 +52,7 @@ UserRouter.get('/auth/users', userController.findMany)
  *         description: User not found
  */
 
-UserRouter.get('/auth/users/:id', userController.findOne)
+UserRouter.get("/auth/users/:id", userController.findOne);
 
 /**
  * @openapi
@@ -66,7 +66,7 @@ UserRouter.get('/auth/users/:id', userController.findOne)
  *         description: User not found
  */
 
-UserRouter.patch('/auth/users/:id', userController.update)
+UserRouter.patch("/auth/users/:id", userController.update);
 
 /**
  * @openapi
@@ -80,5 +80,5 @@ UserRouter.patch('/auth/users/:id', userController.update)
  *         description: User not found
  */
 
-UserRouter.delete('/auth/users/:id', userController.delete)
-export default UserRouter
+UserRouter.delete("/auth/users/:id", userController.delete);
+export default UserRouter;

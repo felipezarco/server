@@ -1,54 +1,98 @@
+import { NextFunction } from "../../../../../.cache/deno/npm/registry.npmjs.org/@types/connect/3.4.38/index.d.ts";
 import UserRepository from "../../../models/MainDatabase/User/UserRepository.ts";
 import { Request, Response } from "npm:express";
 
 export default class UserController {
-
-  private userRepository: UserRepository
+  private userRepository: UserRepository;
 
   constructor({
-    userRepository = new UserRepository()
+    userRepository = new UserRepository(),
   } = {}) {
-    this.userRepository = userRepository
+    this.userRepository = userRepository;
   }
 
-  create = async (req: Request, res: Response): Promise<Response> => {
-    const { name, login, loginType, password } = req.body;
+  create = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<Response> => {
+    try {
+      const { name, login, loginType, password } = req.body;
 
-    const user = await this.userRepository.create({
-      name,
-      login,
-      loginType,
-      password,
-    });
+      const user = await this.userRepository.create({
+        name,
+        login,
+        loginType,
+        password,
+      });
 
-    return res.send_ok("Bem-vindo(a), " + user.firstTwoNameLetters, user);
-  }
-
-  findMany = async (_req: Request, res: Response): Promise<Response> => {
-    const users = await this.userRepository.findMany({});
-    for (let user of users) {
-      console.log(user.firstTwoNameLetters)
+      return res.send_ok("Bem-vindo(a), " + user.firstTwoNameLetters, user);
+    } catch (err) {
+      next(err);
     }
-    return res.send_ok("Usuários encontrados com sucesso!", users);
-  }
+  };
 
-  findOne = async (req: Request, res: Response): Promise<Response> => {
-    const { id } = req.params;
-    const user = await this.userRepository.findOne({ id });
-    return res.send_ok("Usuário encontrado com sucesso!", user);
-  }
+  findMany = async (
+    _req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<Response> => {
+    try {
+      const users = await this.userRepository.findMany({});
+      // for (let user of users) {
+      //   console.log(user.firstTwoNameLetters)
+      // }
+      return res.send_ok("Usuários encontrados com sucesso!", users);
+    } catch (err) {
+      next(err);
+    }
+  };
 
-  update = async (req: Request, res: Response): Promise<Response> => {
-    const { id } = req.params;
-    const { name, login, loginType, password } = req.body;
-    const user = await this.userRepository.update(id, { name, login, loginType, password });
-    return res.send_ok("Usuário atualizado com sucesso", user);
-  }
+  findOne = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<Response> => {
+    try {
+      const { id } = req.params;
+      const user = await this.userRepository.findOne({ id });
+      return res.send_ok("Usuário encontrado com sucesso!", user);
+    } catch (err) {
+      next(err);
+    }
+  };
 
-  delete = async (req: Request, res: Response): Promise<Response> => {
-    const { id } = req.params;
-    await this.userRepository.delete(id);
-    return res.send_ok("Usuário deletado com sucesso!");
-  }
+  update = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<Response> => {
+    try {
+      const { id } = req.params;
+      const { name, login, loginType, password } = req.body;
+      const user = await this.userRepository.update(id, {
+        name,
+        login,
+        loginType,
+        password,
+      });
+      return res.send_ok("Usuário atualizado com sucesso", user);
+    } catch (err) {
+      next(err);
+    }
+  };
 
+  delete = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<Response> => {
+    try {
+      const { id } = req.params;
+      await this.userRepository.delete(id);
+      return res.send_ok("Usuário deletado com sucesso!");
+    } catch (err) {
+      next(err);
+    }
+  };
 }

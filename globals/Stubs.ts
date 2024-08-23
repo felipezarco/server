@@ -11,11 +11,23 @@ export const MockResponser = {
   send_forbidden: (message: string, data?: any) => ({ message, data }),
   send_gatewayTimeout: (message: string, data?: any) => ({ message, data }),
   send_gone: (message: string, data?: any) => ({ message, data }),
-  send_httpVersionNotSupported: (message: string, data?: any) => ({ message, data }),
+  send_httpVersionNotSupported: (message: string, data?: any) => ({
+    message,
+    data,
+  }),
   send_imATeapot: (message: string, data?: any) => ({ message, data }),
-  send_insufficientSpaceOnResource: (message: string, data?: any) => ({ message, data }),
-  send_insufficientStorage: (message: string, data?: any) => ({ message, data }),
-  send_internalServerError: (message: string, data?: any) => ({ message, data }),
+  send_insufficientSpaceOnResource: (message: string, data?: any) => ({
+    message,
+    data,
+  }),
+  send_insufficientStorage: (message: string, data?: any) => ({
+    message,
+    data,
+  }),
+  send_internalServerError: (message: string, data?: any) => ({
+    message,
+    data,
+  }),
   send_lengthRequired: (message: string, data?: any) => ({ message, data }),
   send_locked: (message: string, data?: any) => ({ message, data }),
   send_methodFailure: (message: string, data?: any) => ({ message, data }),
@@ -24,9 +36,15 @@ export const MockResponser = {
   send_movedTemporarily: (message: string, data?: any) => ({ message, data }),
   send_multiStatus: (message: string, data?: any) => ({ message, data }),
   send_multipleChoices: (message: string, data?: any) => ({ message, data }),
-  send_networkAuthenticationRequired: (message: string, data?: any) => ({ message, data }),
+  send_networkAuthenticationRequired: (message: string, data?: any) => ({
+    message,
+    data,
+  }),
   send_noContent: (message: string, data?: any) => ({ message, data }),
-  send_nonAuthoritativeInformation: (message: string, data?: any) => ({ message, data }),
+  send_nonAuthoritativeInformation: (message: string, data?: any) => ({
+    message,
+    data,
+  }),
   send_notAcceptable: (message: string, data?: any) => ({ message, data }),
   send_notFound: (message: string, data?: any) => ({ message, data }),
   send_notImplemented: (message: string, data?: any) => ({ message, data }),
@@ -36,14 +54,26 @@ export const MockResponser = {
   send_paymentRequired: (message: string, data?: any) => ({ message, data }),
   send_permanentRedirect: (message: string, data?: any) => ({ message, data }),
   send_preconditionFailed: (message: string, data?: any) => ({ message, data }),
-  send_preconditionRequired: (message: string, data?: any) => ({ message, data }),
+  send_preconditionRequired: (message: string, data?: any) => ({
+    message,
+    data,
+  }),
   send_processing: (message: string, data?: any) => ({ message, data }),
-  send_proxyAuthenticationRequired: (message: string, data?: any) => ({ message, data }),
-  send_requestHeaderFieldsTooLarge: (message: string, data?: any) => ({ message, data }),
+  send_proxyAuthenticationRequired: (message: string, data?: any) => ({
+    message,
+    data,
+  }),
+  send_requestHeaderFieldsTooLarge: (message: string, data?: any) => ({
+    message,
+    data,
+  }),
   send_requestTimeout: (message: string, data?: any) => ({ message, data }),
   send_requestTooLong: (message: string, data?: any) => ({ message, data }),
   send_requestUriTooLong: (message: string, data?: any) => ({ message, data }),
-  send_requestedRangeNotSatisfiable: (message: string, data?: any) => ({ message, data }),
+  send_requestedRangeNotSatisfiable: (message: string, data?: any) => ({
+    message,
+    data,
+  }),
   send_resetContent: (message: string, data?: any) => ({ message, data }),
   send_seeOther: (message: string, data?: any) => ({ message, data }),
   send_serviceUnavailable: (message: string, data?: any) => ({ message, data }),
@@ -51,7 +81,13 @@ export const MockResponser = {
   send_temporaryRedirect: (message: string, data?: any) => ({ message, data }),
   send_tooManyRequests: (message: string, data?: any) => ({ message, data }),
   send_unauthorized: (message: string, data?: any) => ({ message, data }),
-  send_unprocessableEntity: (message: string, data?: any) => ({ message, data }),
-  send_unsupportedMediaType: (message: string, data?: any) => ({ message, data }),
+  send_unprocessableEntity: (message: string, data?: any) => ({
+    message,
+    data,
+  }),
+  send_unsupportedMediaType: (message: string, data?: any) => ({
+    message,
+    data,
+  }),
   send_useProxy: (message: string, data?: any) => ({ message, data }),
-}
+};

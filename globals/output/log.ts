@@ -1,1 +1,1 @@
-export default console.info
+export default console.info;

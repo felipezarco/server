@@ -1,13 +1,10 @@
-
-import { Request, Response, NextFunction } from 'npm:express'
-
+import { NextFunction, Request, Response } from "npm:express";
 
 const SecurityMiddle = (
-  req: Request, res: Response, next: NextFunction) => {
+  _req: Request,
+  _res: Response,
+  _next: NextFunction,
+) => {
+};
 
-
-}
-
-
-export default SecurityMiddle
-
+export default SecurityMiddle;

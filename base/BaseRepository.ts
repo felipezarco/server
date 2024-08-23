@@ -1,8 +1,7 @@
-import { Model, FilterQuery, UpdateQuery } from 'npm:mongoose'
+import { FilterQuery, Model, UpdateQuery } from "npm:mongoose";
 
 export default class BaseRepository<T> {
-
-  model: Model<T> 
+  model: Model<T>;
 
   constructor(model: Model<T>) {
     this.model = model;
@@ -21,18 +20,20 @@ export default class BaseRepository<T> {
   }
 
   async findOne(query: FilterQuery<T>) {
-    if (query.id) { Object.assign(query, { _id: query.id }); delete query.id }
+    if (query.id) {
+      Object.assign(query, { _id: query.id });
+      delete query.id;
+    }
     return await this.model.findOne(query);
   }
 
   async update(id: string, update: UpdateQuery<T>) {
     return await this.model.findByIdAndUpdate(id, update, {
       new: true,
-    })
+    });
   }
 
   async delete(id: string) {
     return await this.model.findByIdAndDelete(id);
   }
 }
-

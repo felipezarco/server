@@ -1,9 +1,8 @@
-
 // @deno-types='npm:@types/express'
-import { Router, Request, Response } from 'npm:express'
+import { Request, Response, Router } from "npm:express";
 import UserRouter from "../features/auth/User/UserRouter.ts";
 
-const AuthRouter = Router()
+const AuthRouter = Router();
 
 /**
  * @openapi
@@ -15,9 +14,9 @@ const AuthRouter = Router()
  *         description: Returns OK.
  */
 
-AuthRouter.get('/auth/ok', (_req: Request, res: Response) => {
-  return res.send_ok('OK')
-})
+AuthRouter.get("/auth/ok", (_req: Request, res: Response) => {
+  return res.send_ok("OK");
+});
 
-AuthRouter.use(UserRouter)
-export default AuthRouter
+AuthRouter.use(UserRouter);
+export default AuthRouter;
