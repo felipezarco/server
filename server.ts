@@ -16,6 +16,7 @@ import Env from "./config/Env.ts";
 import { Database } from "./database/Database.ts";
 import log from "./globals/output/log.ts";
 import BackgroundJobs from "./jobs/BackgroundJobs.ts";
+import InitializeRepositories from "./models/InitializeRepositories.ts";
 
 const app = express();
 
@@ -48,6 +49,8 @@ const responserrorInstance = new responserror.default();
 app.use(responserrorInstance.errorHandler);
 
 await db.connect();
+
+InitializeRepositories();
 
 if (app) {
   app.listen(Env.serverPort, () => {

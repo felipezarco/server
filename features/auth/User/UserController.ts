@@ -23,7 +23,7 @@ export default class UserController {
         name,
         login,
         loginType,
-        password,
+        password
       });
 
       return res.send_ok("Bem-vindo(a), " + user.firstTwoNameLetters, user);
@@ -39,10 +39,11 @@ export default class UserController {
   ): Promise<Response> => {
     try {
       const users = await this.userRepository.findMany({});
-      // for (let user of users) {
-      //   console.log(user.firstTwoNameLetters)
-      // }
+      for (const user of users) {
+        user.firstTwoNameLetters = user.name.slice(0, 2);
+      }
       return res.send_ok("Usuários encontrados com sucesso!", users);
+
     } catch (err) {
       next(err);
     }
@@ -55,7 +56,7 @@ export default class UserController {
   ): Promise<Response> => {
     try {
       const { id } = req.params;
-      const user = await this.userRepository.findOne({ id });
+      const user = await this.userRepository.findById(id);
       return res.send_ok("Usuário encontrado com sucesso!", user);
     } catch (err) {
       next(err);

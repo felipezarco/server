@@ -1,3 +1,4 @@
+import { IAddress } from "../Address/AddressSchema.ts";
 import { IUser } from "./UserSchema.ts";
 
 class UserClass implements IUser {
@@ -16,6 +17,7 @@ class UserClass implements IUser {
   get firstTwoNameLetters() {
     return this.name.slice(0, 2);
   }
+
 }
 
 export default UserClass;

@@ -3,6 +3,7 @@ import { hash } from "https://deno.land/x/bcrypt@v0.4.1/mod.ts";
 import UserClass from "./UserClass.ts";
 import BaseSchema, { required } from "../../../base/BaseSchema.ts";
 import is from "jsr:@zarco/isness";
+import { IAddress } from "../Address/AddressSchema.ts";
 export enum LoginType {
   email = "email",
   cellphone = "cellphone",
@@ -17,9 +18,17 @@ export interface IUser extends IUserVirtuals {
   password: string;
 }
 
-interface IUserVirtuals {
+interface IUserVirtuals extends IUserRefs {
   firstTwoNameLetters?: string;
 }
+
+interface IUserRefs {
+  addresses?: IAddress;
+}
+
+export const UserRefs = [
+  "addresses"
+];
 
 class UserSchemaClass extends BaseSchema {
   constructor() {
@@ -70,6 +79,16 @@ class UserSchemaClass extends BaseSchema {
           message: "A senha deve ter pelo menos 8 caracteres!",
         },
       },
+      
+      /************************* BEGIN: REFERENCES  /*************************/
+      addresses: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Address",
+        },
+      ],
+      /************************* END: REFERENCES  /*************************/
+
     }, {});
   }
 }

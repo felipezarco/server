@@ -1,8 +1,10 @@
 {
   "tasks": {
-    "dev": "deno run --watch --allow-read --allow-write --allow-env --allow-net --allow-ffi --allow-sys -c tsconfig.json server.ts dev"
+    "dev": "deno run --watch -A -c tsconfig.json server.ts dev"
   },
   "imports": {
-    "@zarco/isness": "jsr:@zarco/isness@^0.1.18"
+    "@types/node": "npm:@types/node@^22.5.0",
+    "@zarco/isness": "jsr:@zarco/isness@^0.1.18",
+    "mongodb-memory-server": "npm:mongodb-memory-server@^10.0.0"
   }
 }

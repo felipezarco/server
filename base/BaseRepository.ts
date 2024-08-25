@@ -2,38 +2,51 @@ import { FilterQuery, Model, UpdateQuery } from "npm:mongoose";
 
 export default class BaseRepository<T> {
   model: Model<T>;
+  modelRefs?: Array<string>;
+  queriedModel?: FilterQuery<T>;
 
-  constructor(model: Model<T>) {
+  constructor(model: Model<T>, modelRefs?: Array<string>) { 
     this.model = model;
+    this.modelRefs = modelRefs;
   }
 
-  async create(data: T) {
-    return await this.model.create(data);
+  create(data: T) {
+    return this.model.create(data);
   }
 
-  async findMany(query: FilterQuery<T>) {
-    return await this.model.find(query);
+  findMany(query: FilterQuery<T>) {
+    const findMany = this.model.find(query)
+    this.modelRefs?.forEach(ref =>findMany.populate(ref));
+    return findMany;
   }
 
-  async findById(id: string) {
-    return await this.model.findById(id);
+  findById(id: string) {
+    const findById = this.model.findById(id)
+    this.modelRefs?.forEach(ref => findById.populate(ref));
+    return findById;
   }
 
-  async findOne(query: FilterQuery<T>) {
+  findOne(query: FilterQuery<T>) {
     if (query.id) {
       Object.assign(query, { _id: query.id });
       delete query.id;
     }
-    return await this.model.findOne(query);
+    const findOne = this.model.findOne(query) 
+    this.modelRefs?.forEach(ref => findOne.populate(ref));
+    return findOne;
   }
 
-  async update(id: string, update: UpdateQuery<T>) {
-    return await this.model.findByIdAndUpdate(id, update, {
+  update(id: string, update: UpdateQuery<T>) {
+    const findAndUpdate = this.model.findByIdAndUpdate(id, update, {
       new: true,
-    });
+    })
+    this.modelRefs?.forEach(ref => findAndUpdate.populate(ref));
+    return findAndUpdate;
   }
 
-  async delete(id: string) {
-    return await this.model.findByIdAndDelete(id);
+  delete(id: string) {
+    const findByIdAndDelete = this.model.findByIdAndDelete(id);
+    this.modelRefs?.forEach(ref => findByIdAndDelete.populate(ref));
+    return findByIdAndDelete;
   }
 }
