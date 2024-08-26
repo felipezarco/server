@@ -1,6 +1,5 @@
-import { NextFunction } from "../../../../../.cache/deno/npm/registry.npmjs.org/@types/connect/3.4.38/index.d.ts";
 import UserRepository from "../../../models/MainDatabase/User/UserRepository.ts";
-import { Request, Response } from "npm:express";
+import { Request, Response, NextFunction } from "npm:express";
 
 export default class UserController {
   private userRepository: UserRepository;
@@ -38,10 +37,13 @@ export default class UserController {
     next: NextFunction,
   ): Promise<Response> => {
     try {
+
       const users = await this.userRepository.findMany({});
+
       for (const user of users) {
         user.firstTwoNameLetters = user.name.slice(0, 2);
       }
+     
       return res.send_ok("Usuários encontrados com sucesso!", users);
 
     } catch (err) {

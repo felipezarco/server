@@ -22,6 +22,8 @@ interface IUserVirtuals extends IUserRefs {
   firstTwoNameLetters?: string;
 }
 
+/********************* Referencias *********************/
+
 interface IUserRefs {
   addresses?: IAddress;
 }
@@ -29,6 +31,8 @@ interface IUserRefs {
 export const UserRefs = [
   "addresses"
 ];
+
+/********************* Referencias *********************/
 
 class UserSchemaClass extends BaseSchema {
   constructor() {
